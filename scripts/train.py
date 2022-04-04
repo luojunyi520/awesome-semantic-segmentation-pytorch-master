@@ -243,7 +243,7 @@ class Trainer(object):
             train_loss_save = losses_reduced + train_loss_save
             if iteration % save_per_iters == 0 and save_to_disk:
                 train_loss = train_loss_save / save_per_iters
-                file = open("train_loss.txt", encoding="utf-8", mode="a")
+                file = open("./models/train_loss.txt", encoding="utf-8", mode="a")
                 file.write(str(train_loss.item()) + '\n')
                 file.close()
                 train_loss_save = 0
@@ -303,7 +303,7 @@ class Trainer(object):
             val_loss_save = val_losses_reduced + val_loss_save
             val_samples = 19
             if i + 1 == val_samples:
-                file = open("val_loss.txt", encoding="utf-8", mode="a")
+                file = open("./models/val_loss.txt", encoding="utf-8", mode="a")
                 val_loss = val_loss_save / val_samples
                 file.write(str(val_loss.item()) + '\n')
                 file.close()
