@@ -26,33 +26,33 @@ class MixSoftmaxCrossEntropyLoss(nn.CrossEntropyLoss):
         return loss
     ####DSloss开始
 
-    def forward(self, *inputs):
-        preds0,preds1,preds2,preds3,target = tuple(inputs)
-        inputs0 = tuple(list(preds0) + [target])
-        inputs1 = tuple(list(preds1) + [target])
-        inputs2 = tuple(list(preds2) + [target])
-        inputs3 = tuple(list(preds3) + [target])
-
-        loss_weight=0.2
-        if self.aux:
-            return dict(loss=self._aux_forward(*inputs))
-        else:
-            loss0 = super(MixSoftmaxCrossEntropyLoss, self).forward(*inputs0)
-            loss1 = super(MixSoftmaxCrossEntropyLoss, self).forward(*inputs1)*loss_weight
-            loss2 = super(MixSoftmaxCrossEntropyLoss, self).forward(*inputs2)*loss_weight
-            loss3 = super(MixSoftmaxCrossEntropyLoss, self).forward(*inputs3)*loss_weight
-            loss = loss0 + loss1 + loss2 + loss3
-            return dict(loss=loss)
-    ####DSloss结束
-
-    ###原loss开始
-    # def forward(self, *inputs, **kwargs):
-    #     preds, target = tuple(inputs)
-    #     inputs = tuple(list(preds) + [target])
+    # def forward(self, *inputs):
+    #     preds0,preds1,preds2,preds3,target = tuple(inputs)
+    #     inputs0 = tuple(list(preds0) + [target])
+    #     inputs1 = tuple(list(preds1) + [target])
+    #     inputs2 = tuple(list(preds2) + [target])
+    #     inputs3 = tuple(list(preds3) + [target])
+    #
+    #     loss_weight=0.2
     #     if self.aux:
     #         return dict(loss=self._aux_forward(*inputs))
     #     else:
-    #         return dict(loss=super(MixSoftmaxCrossEntropyLoss, self).forward(*inputs))
+    #         loss0 = super(MixSoftmaxCrossEntropyLoss, self).forward(*inputs0)
+    #         loss1 = super(MixSoftmaxCrossEntropyLoss, self).forward(*inputs1)*loss_weight
+    #         loss2 = super(MixSoftmaxCrossEntropyLoss, self).forward(*inputs2)*loss_weight
+    #         loss3 = super(MixSoftmaxCrossEntropyLoss, self).forward(*inputs3)*loss_weight
+    #         loss = loss0 + loss1 + loss2 + loss3
+    #         return dict(loss=loss)
+    ####DSloss结束
+
+    ##原loss开始
+    def forward(self, *inputs, **kwargs):
+        preds, target = tuple(inputs)
+        inputs = tuple(list(preds) + [target])
+        if self.aux:
+            return dict(loss=self._aux_forward(*inputs))
+        else:
+            return dict(loss=super(MixSoftmaxCrossEntropyLoss, self).forward(*inputs))
     ###原loss结束
 
 # reference: https://github.com/zhanghang1989/PyTorch-Encoding/blob/master/encoding/nn/loss.py

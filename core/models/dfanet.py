@@ -87,7 +87,7 @@ class DFANet(nn.Module):
         out = self.conv_out(fusion)
         out = F.interpolate(out, scale_factor=4, mode='bilinear', align_corners=True)
         outputs.append(out)
-
+        # return out
         return tuple(outputs)
 
 
@@ -107,7 +107,7 @@ def get_dfanet(dataset='citys', backbone='resnet50', pretrained=False, root='~/.
         # device = torch.device(kwargs['local_rank'])
         # model.load_state_dict(torch.load(get_model_file('dfanet_%s' % (acronyms[dataset]), root=root),
         #                       map_location=device))
-        model.load_state_dict(torch.load('../runs/DFA_result/dfanet_resnet50_citys_15800.pth'))
+        model.load_state_dict(torch.load('../models/dfanet_resnet50_citys_50.pth',map_location='cuda'))
     return model
 
 

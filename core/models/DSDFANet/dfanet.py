@@ -110,7 +110,7 @@ class DFANet(nn.Module):
         out = F.interpolate(out, scale_factor=4, mode='bilinear', align_corners=True)
         # print('out2尺寸：', out.shape)
         outputs.append(out)
-
+            ###测试时，将后边四个输出舍去，不影响结果
         return tuple(outputs),tuple(DS1_out),tuple(DS2_out),tuple(DS3_out)
 
 

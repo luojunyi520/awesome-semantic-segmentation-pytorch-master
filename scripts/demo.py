@@ -20,7 +20,7 @@ parser.add_argument('--dataset', type=str, default='citys', choices=['pascal_voc
                     help='dataset name (default: pascal_voc)')
 parser.add_argument('--save-folder', default='../models',
                     help='Directory for saving checkpoint models')
-parser.add_argument('--input-pic', type=str, default='../datasets/citys/leftImg8bit/train/Low-219.png',
+parser.add_argument('--input-pic', type=str, default='../datasets/citys/leftImg8bit/train/Low-145.png',
                     help='path to the input picture')
 parser.add_argument('--outdir', default='./eval', type=str,
                     help='path to save the predict result')

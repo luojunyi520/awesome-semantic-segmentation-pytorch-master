@@ -4,7 +4,8 @@ import datetime
 import os
 import shutil
 import sys
-
+import torchvision
+# model = torchvision.models.segmentation.deeplabv3_resnet101(pretrained=True)
 cur_path = os.path.abspath(os.path.dirname(__file__))
 root_path = os.path.split(cur_path)[0]
 sys.path.append(root_path)
@@ -219,6 +220,11 @@ class Trainer(object):
             targets = targets.to(self.device)
 
             outputs = self.model(images)
+            # out = self.model(images)
+            # outputs = list()
+            # outputs.append(out)
+            # outputs=tuple(outputs)
+
             loss_dict = self.criterion(outputs, targets)
             losses = sum(loss for loss in loss_dict.values())
 
@@ -279,6 +285,10 @@ class Trainer(object):
 
             with torch.no_grad():
                 outputs = model(image)
+                # out = self.model(image)
+                # outputs = list()
+                # outputs.append(out)
+                # outputs = tuple(outputs)
 
             self.metric.update(outputs[0], target)
 
